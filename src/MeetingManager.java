@@ -58,7 +58,7 @@ public class MeetingManager {
         }
     }
 
-    private Vector<Meeting> getAllMeetings() {
+    protected Vector<Meeting> getAllMeetings() {
         Vector<Meeting> meetings = new Vector<Meeting>();
         String url = "jdbc:sqlite:/tmp/sqlite/ImportantMeetings.db";
         Connection conn = null;
@@ -82,7 +82,7 @@ public class MeetingManager {
         }
     }
 
-    private void saveMeeting(Meeting meeting) {
+    protected void saveMeeting(Meeting meeting) {
         String url = "jdbc:sqlite:/tmp/sqlite/ImportantMeetings.db";
         Connection conn = null;
         try {

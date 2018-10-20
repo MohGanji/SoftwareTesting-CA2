@@ -106,3 +106,5 @@ fabric.properties
 *.xml
 
 # End of https://www.gitignore.io/api/intellij
+
+*.iml

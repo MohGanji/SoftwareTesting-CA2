@@ -14,9 +14,7 @@ public class Person {
         this.email = email;
     }
 
-
-    public void notifyUser() throws IOException {
-        String url = "http://mail.test.ut.ac.ir";
+    public void sendNotifyRequest(String url) throws IOException{
         try {
             URL obj = new URL(url);
             HttpURLConnection con = (HttpURLConnection) obj.openConnection();
@@ -34,6 +32,12 @@ public class Person {
         } catch (ProtocolException e) {
             e.printStackTrace();
         }
+    }
+
+
+    public void notifyUser() throws IOException{
+        String url = "http://mail.test.ut.ac.ir";
+        sendNotifyRequest(url);
     }
 
 
