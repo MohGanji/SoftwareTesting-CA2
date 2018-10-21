@@ -10,30 +10,34 @@ import static junit.framework.TestCase.assertTrue;
 
 public class MeetingManagerTest {
 
-    private MockPerson p1, p2, p3, p4, p5;
-    private Vector<Person> attendees1, attendees2;
-    private Meeting m1, m2;
+    //    private MockPerson p1, p2, p3, p4, p5;
+    private Vector<MockPerson> persons;
+    private Vector<Person> attendees1, attendees2, attendees3;
+    private Meeting m1, m2, m3;
     private FakeDB db;
 
 
 
     @Before
     public void initialize(){
-        p1 = new MockPerson ("Ali","Alavi");
-        p2 = new MockPerson ("Reza","Razavi");
-        p3 = new MockPerson ("Gojeh","Farangi");
-        p4 = new MockPerson ("Javad","Javadi");
-        p5 = new MockPerson ("Hasan","Hasani");
+        persons.add(new MockPerson ("Ali","Alavi"));
+        persons.add(new MockPerson ("Reza","Razavi"));
+        persons.add(new MockPerson ("Gojeh","Farangi"));
+        persons.add(new MockPerson ("Javad","Javadi"));
+        persons.add(new MockPerson ("Hasan","Hasani"));
         attendees1 = new Vector<>();
-        attendees1.add(p1);
-        attendees1.add(p2);
-        attendees1.add(p3);
+        attendees1.add(persons.get(0));
+        attendees1.add(persons.get(1));
+        attendees1.add(persons.get(2));
         attendees2 = new Vector<>();
-        attendees1.add(p3);
-        attendees1.add(p4);
-        attendees1.add(p5);
+        attendees2.add(persons.get(2));
+        attendees2.add(persons.get(3));
+        attendees2.add(persons.get(4));
+        attendees3 = new Vector<>();
         m1 = new Meeting(attendees1, new Date());
         m2 = new Meeting(attendees2, new Date());
+        m3 = new Meeting(attendees3, new Date());
+
     }
 
     @Test(expected = Exception.class)
@@ -59,7 +63,7 @@ public class MeetingManagerTest {
         db.addMeeting(m1);
         MockMeetingManager meetingManager = new MockMeetingManager(db);
         meetingManager.notifyMeetings();
-        assertEquals(p1.getNotifiedCount(), 1);
+        assertEquals(persons.get(0).getNotifiedCount(), 1);
     }
 
     @Test
@@ -69,6 +73,17 @@ public class MeetingManagerTest {
         db.addMeeting(m2);
         MockMeetingManager meetingManager = new MockMeetingManager(db);
         meetingManager.notifyMeetings();
-        assertEquals(p3.getNotifiedCount(), 2);
+        assertEquals(persons.get(2).getNotifiedCount(), 2);
+    }
+
+    @Test
+    public void notifyMeetings_notifyDatabaseMeetings_notifyAMeetingWithNoUsers() throws IOException {
+        db = new FakeDB();
+        db.addMeeting(m3);
+        MockMeetingManager meetingManager = new MockMeetingManager(db);
+        meetingManager.notifyMeetings();
+        for (MockPerson person: persons){
+            assertEquals(person.getNotifiedCount(), 0);
+        }
     }
 }
