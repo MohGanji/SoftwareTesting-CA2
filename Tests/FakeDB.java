@@ -1,6 +1,6 @@
 import java.util.Vector;
 
-public class MockDB {
+public class FakeDB {
     private Vector<Meeting> meetings = new Vector<>();
     private boolean called = false;
 
