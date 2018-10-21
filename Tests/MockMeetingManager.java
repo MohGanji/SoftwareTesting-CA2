@@ -2,14 +2,14 @@ import java.util.Date;
 import java.util.Vector;
 
 public class MockMeetingManager extends MeetingManager{
-    private MockDB db;
+    private FakeDB db;
 
     @Override
     public void setDateValidatorUrl(String dateValidatorUrl) {
         this.DATE_VALIDATOR_URL = dateValidatorUrl;
     }
 
-    public MockMeetingManager(MockDB db) {
+    public MockMeetingManager(FakeDB db) {
         this.db = db;
     }
 

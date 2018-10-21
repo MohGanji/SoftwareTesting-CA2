@@ -13,7 +13,7 @@ public class MeetingManagerTest {
     private MockPerson p1, p2, p3, p4, p5;
     private Vector<Person> attendees1, attendees2;
     private Meeting m1, m2;
-    private MockDB db;
+    private FakeDB db;
 
 
 
@@ -38,7 +38,7 @@ public class MeetingManagerTest {
 
     @Test(expected = Exception.class)
     public void bookMeeting_bookAMeetingWithBadDate_meetingNotSavedIntoDatabase() throws Exception {
-        db = new MockDB();
+        db = new FakeDB();
         MockMeetingManager meetingManager = new MockMeetingManager(db);
         meetingManager.setDateValidatorUrl("http://localhost:" + Utils.DateServerPort + "/false");
         meetingManager.bookMeeting(attendees1, 10);
@@ -46,7 +46,7 @@ public class MeetingManagerTest {
 
     @Test
     public void bookMeeting_bookMeetingWithGoodDate_meetingSavedIntoDatabase() throws Exception{
-        db = new MockDB();
+        db = new FakeDB();
         MockMeetingManager meetingManager = new MockMeetingManager(db);
         meetingManager.setDateValidatorUrl("http://localhost:" + Utils.DateServerPort + "/true");
         meetingManager.bookMeeting(attendees1, 10);
@@ -55,7 +55,7 @@ public class MeetingManagerTest {
 
     @Test
     public void notifyMeetings_notifyDatabaseMeetings_notifyAUserInOneMeetingOnce() throws IOException{
-        db = new MockDB();
+        db = new FakeDB();
         db.addMeeting(m1);
         MockMeetingManager meetingManager = new MockMeetingManager(db);
         meetingManager.notifyMeetings();
@@ -64,7 +64,7 @@ public class MeetingManagerTest {
 
     @Test
     public void notifyMeetings_notifyDatabaseMeetings_notifyAUserInTwoMeetingTwice() throws IOException{
-        db = new MockDB();
+        db = new FakeDB();
         db.addMeeting(m1);
         db.addMeeting(m2);
         MockMeetingManager meetingManager = new MockMeetingManager(db);
