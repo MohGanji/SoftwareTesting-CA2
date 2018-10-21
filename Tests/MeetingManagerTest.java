@@ -11,6 +11,8 @@ public class MeetingManagerTest {
     private Meeting m1, m2;
     private MockDB db;
 
+
+
     @Before
     public void initialize(){
         p1 = new MockPerson ("","");
@@ -31,8 +33,10 @@ public class MeetingManagerTest {
         db = new MockDB();
     }
 
-    @Test
-    public void bookMeeting_bookAMeetingWithGoodDate_meetingSavedIntoDatabase(){
+    @Test(expected = Exception.class)
+    public void bookMeeting_bookAMeetingWithBadDate_meetingNotSavedIntoDatabase() throws Exception {
         MockMeetingManager meetingManager = new MockMeetingManager(db);
+        meetingManager.setDateValidatorUrl("http://localhost:" + Utils.DateServerPort + "/false");
+        meetingManager.bookMeeting(attendees1, 10);
     }
 }

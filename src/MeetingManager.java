@@ -1,3 +1,5 @@
+import io.netty.handler.codec.http.cors.CorsConfig;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -10,7 +12,7 @@ import java.util.Vector;
 
 public class MeetingManager {
     private static MeetingManager ourInstance = new MeetingManager();
-    private static String DATE_VALIDATOR_URL = "http://localhost:8000/checkdate";
+    protected String DATE_VALIDATOR_URL = "http://localhost:8000/checkdate";
 
     public static MeetingManager getInstance() {
         return ourInstance;
@@ -30,9 +32,9 @@ public class MeetingManager {
         DATE_VALIDATOR_URL = url;
     }
 
-    protected boolean checkDateRequest(java.util.Date date, String validatorUrl){
+    protected boolean checkDateRequest(java.util.Date date){
         try {
-            URL obj = new URL(validatorUrl);
+            URL obj = new URL(this.DATE_VALIDATOR_URL);
 
             HttpURLConnection con = (HttpURLConnection) obj.openConnection();
             con.setRequestProperty("User-Agent", "Mozilla/5.0");
@@ -53,7 +55,7 @@ public class MeetingManager {
     }
 
     protected boolean checkDate(java.util.Date date) {
-        return checkDateRequest(date, MeetingManager.DATE_VALIDATOR_URL);
+        return checkDateRequest(date);
     }
 
     public void notifyMeetings() throws IOException {

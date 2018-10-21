@@ -4,7 +4,10 @@ import java.util.Vector;
 public class MockMeetingManager extends MeetingManager{
     private MockDB db;
 
-    private static String DATE_VALIDATOR_URL = "http://localhost:" + Utils.DateServerPort;
+    @Override
+    public void setDateValidatorUrl(String dateValidatorUrl) {
+        this.DATE_VALIDATOR_URL = dateValidatorUrl;
+    }
 
     public MockMeetingManager(MockDB db) {
         this.db = db;
@@ -20,6 +23,6 @@ public class MockMeetingManager extends MeetingManager{
     }
     @Override
     protected boolean checkDate(Date date){
-        return this.checkDateRequest(date, DATE_VALIDATOR_URL);
+        return this.checkDateRequest(date);
     }
 }
