@@ -19,11 +19,11 @@ public class MeetingManagerTest {
 
     @Before
     public void initialize(){
-        p1 = new MockPerson ("","");
-        p2 = new MockPerson ("","");
-        p3 = new MockPerson ("","");
-        p4 = new MockPerson ("","");
-        p5 = new MockPerson ("","");
+        p1 = new MockPerson ("Ali","Alavi");
+        p2 = new MockPerson ("Reza","Razavi");
+        p3 = new MockPerson ("Gojeh","Farangi");
+        p4 = new MockPerson ("Javad","Javadi");
+        p5 = new MockPerson ("Hasan","Hasani");
         attendees1 = new Vector<>();
         attendees1.add(p1);
         attendees1.add(p2);
