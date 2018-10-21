@@ -30,9 +30,9 @@ public class MeetingManager {
         DATE_VALIDATOR_URL = url;
     }
 
-    private boolean checkDate(java.util.Date date) {
+    protected boolean checkDateRequest(java.util.Date date, String validatorUrl){
         try {
-            URL obj = new URL(MeetingManager.DATE_VALIDATOR_URL);
+            URL obj = new URL(validatorUrl);
 
             HttpURLConnection con = (HttpURLConnection) obj.openConnection();
             con.setRequestProperty("User-Agent", "Mozilla/5.0");
@@ -50,6 +50,10 @@ public class MeetingManager {
             e.printStackTrace();
             return false;
         }
+    }
+
+    protected boolean checkDate(java.util.Date date) {
+        return checkDateRequest(date, MeetingManager.DATE_VALIDATOR_URL);
     }
 
     public void notifyMeetings() throws IOException {
