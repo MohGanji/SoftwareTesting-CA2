@@ -11,7 +11,7 @@ import static junit.framework.TestCase.assertTrue;
 public class MeetingManagerTest {
 
     //    private MockPerson p1, p2, p3, p4, p5;
-    private Vector<MockPerson> persons;
+    private Vector<MockPerson> persons = new Vector<>();
     private Vector<Person> attendees1, attendees2, attendees3;
     private Meeting m1, m2, m3;
     private FakeDB db;
